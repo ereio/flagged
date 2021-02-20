@@ -24,9 +24,10 @@ const Game = (props) => {
   // if guess is truthy, return if guess was correct
   const correct = !guess || answer.name == guess;
 
-  const onStartRound = useCallback(() => dispatch(
-    generateRound()
-  ), [dispatch])
+  const onStartRound = () => {
+    setGuess(null)
+    dispatch(generateRound())
+  }
 
   const onSelectCountry = useCallback((country) => {
     setGuess(country)
