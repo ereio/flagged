@@ -34,6 +34,6 @@ export const fetchCountries = () => async (dispatch, getState) => {
   }
 };
 
-export const resetInfo = () => (dispatch, getState) => {
-  dispatch({ type: RESET_GAME });
+export const resetCountries = () => (dispatch, getState) => {
+  dispatch({ type: RESET_COUNTRIES });
 };

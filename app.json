@@ -1,4 +1,8 @@
 {
   "name": "flagged",
-  "displayName": "flagged"
+  "expo": {
+    "name": "Flagged",
+    "slug": "flagged",
+    "description": "A country guessing game based on the country's flag emoji 🗺"
+  }
 }
