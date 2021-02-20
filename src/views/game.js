@@ -23,13 +23,13 @@ const Game = (props) => {
   const submitted = useSelector(state => state.game.submitted)
 
   // if guess is truthy, return if guess was correct
-  const correct = !guess || answer.name == guess.name;
+  const correct = !guess || answer.name == guess;
 
   const onSubmitAnswer = () => dispatch(
     submitAnswer(guess)
   )
 
-  const onExit = () => useCallback(() => {
+  const onExit = useCallback(() => {
     navigation.dispatch(StackActions.popToTop);
   }, [navigation])
 

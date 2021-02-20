@@ -37,6 +37,7 @@ export const generateRound = () => (dispatch, getState) => {
 export const submitAnswer = (guess) => (dispatch, getState) => {
   dispatch({ type: SET_SUBMITTED })
   const { answer: { name } } = getState().game;
+  console.log(name, guess)
   if (name == guess) {
     dispatch({ type: INCREMENT_STREAK })
   } else {
