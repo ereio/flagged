@@ -24,10 +24,11 @@ export default function gameReducer(state = initialState(), action) {
       }
     }
     case INCREMENT_STREAK: {
+      const newStreak = state.streak + 1;
       return {
         ...state,
-        best: state.streak > state.best ? state.streak : state.best,
-        streak: state.streak + 1
+        best: newStreak > state.best ? newStreak : state.best,
+        streak: newStreak
       }
     }
     case RESET_STREAK: {
@@ -37,7 +38,10 @@ export default function gameReducer(state = initialState(), action) {
       }
     }
     case RESET_GAME:
-      return initialState();
+      return {
+        ...initialState(),
+        best: state.best
+      }
     default:
       return state;
   }

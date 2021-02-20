@@ -4,10 +4,9 @@ import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-na
 import { Button, ButtonOutline } from './components';
 
 import { useNavigation, StackActions } from '@react-navigation/native';
-import { Routes } from '../global/values';
 import { t } from 'react-native-tailwindcss';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitAnswer, generateRound } from '../store/game/actions';
+import { submitAnswer, generateRound, resetGame } from '../store/game/actions';
 
 /**
  * Game Screen 
@@ -25,14 +24,6 @@ const Game = (props) => {
   // if guess is truthy, return if guess was correct
   const correct = !guess || answer.name == guess;
 
-  const onSubmitAnswer = () => dispatch(
-    submitAnswer(guess)
-  )
-
-  const onExit = useCallback(() => {
-    navigation.dispatch(StackActions.popToTop);
-  }, [navigation])
-
   const onStartRound = useCallback(() => dispatch(
     generateRound()
   ), [dispatch])
@@ -40,6 +31,15 @@ const Game = (props) => {
   const onSelectCountry = useCallback((country) => {
     setGuess(country)
   }, [options]);
+
+  const onSubmitAnswer = () => dispatch(
+    submitAnswer(guess)
+  )
+
+  const onExit = useCallback(() => {
+    dispatch(resetGame())
+    navigation.dispatch(StackActions.popToTop);
+  }, [navigation])
 
   return (
     <SafeAreaView

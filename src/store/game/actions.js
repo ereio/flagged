@@ -1,3 +1,4 @@
+import { OPTION_AMOUNT } from "../../global/values";
 
 export const SET_SUBMITTED = 'SET_SUBMITTED';
 export const GENERATE_ROUND = 'GENERATE_ROUND';
@@ -9,27 +10,15 @@ export const RESET_STREAK = 'RESET_STREAK';
 export const generateRound = () => (dispatch, getState) => {
   const { countries } = getState().countries;
 
-  const options = [{
-    "code": "AR",
-    "emoji": "🇦🇷",
-    "name": "Argentina"
-  },
-  {
-    "code": "AS",
-    "emoji": "🇦🇸",
-    "name": "American Samoa"
-  },
-  {
-    "code": "AT",
-    "emoji": "🇦🇹",
-    "name": "Austria"
-  }];
+  let options = [];
 
-  const answer = {
-    "code": "AR",
-    "emoji": "🇦🇷",
-    "name": "Argentina"
-  };
+  for (let i = 0; i < OPTION_AMOUNT; i++) {
+    const optionIndex = Math.floor(Math.random() * countries.length);
+    options.push(countries[optionIndex])
+  }
+
+  const answerIndex = Math.floor(Math.random() * options.length);
+  const answer = options[answerIndex];
 
   dispatch({ type: GENERATE_ROUND, answer: answer, options: options })
 }
@@ -37,7 +26,7 @@ export const generateRound = () => (dispatch, getState) => {
 export const submitAnswer = (guess) => (dispatch, getState) => {
   dispatch({ type: SET_SUBMITTED })
   const { answer: { name } } = getState().game;
-  console.log(name, guess)
+
   if (name == guess) {
     dispatch({ type: INCREMENT_STREAK })
   } else {

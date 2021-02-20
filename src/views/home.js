@@ -8,7 +8,9 @@ import { Routes } from '../global/values';
 import { t } from 'react-native-tailwindcss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { fetchCountries } from '../store/countries/actions';
+import { fetchCountries, } from '../store/countries/actions';
+import { generateRound, } from '../store/game/actions';
+
 
 /**
  * Home Screen
@@ -16,12 +18,17 @@ import { fetchCountries } from '../store/countries/actions';
 const Home = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const best = useSelector(state => state.game.best);
   const loading = useSelector(state => state.countries.loading);
+  const hasCountries = useSelector(state => !!state.countries.length);
 
   const onStartGame = useCallback(async () => {
-    await dispatch(fetchCountries());
+    if (!hasCountries) {
+      await dispatch(fetchCountries());
+    }
+    await dispatch(generateRound())
     navigation.push(Routes.Game);
-  }, [dispatch]);
+  }, [dispatch, hasCountries]);
 
 
   return (
@@ -42,6 +49,11 @@ const Home = (props) => {
         <Text style={styles.emoji}>
           {'🗺️'}
         </Text>
+        {
+          !best || <Text style={[t.textXl]}>
+            {`Best Streak: ${best}`}
+          </Text>
+        }
       </View>
       <View style={[t.flex, t.flexCol, t.justifyCenter, t.flex1]}>
         <Button disabled={loading} loading={loading} onPress={() => onStartGame()}>
