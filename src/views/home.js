@@ -6,8 +6,9 @@ import { Button } from './components';
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../global/values';
 import { t } from 'react-native-tailwindcss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
+import { fetchCountries } from '../store/countries/actions';
 
 /**
  * Home Screen
@@ -15,8 +16,10 @@ import { useCallback } from 'react';
 const Home = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const loading = useSelector(state => state.countries.loading);
 
   const onStartGame = useCallback(async () => {
+    await dispatch(fetchCountries());
     navigation.push(Routes.Game);
   }, [dispatch]);
 
@@ -41,7 +44,7 @@ const Home = (props) => {
         </Text>
       </View>
       <View style={[t.flex, t.flexCol, t.justifyCenter, t.flex1]}>
-        <Button onPress={() => onStartGame()}>
+        <Button disabled={loading} loading={loading} onPress={() => onStartGame()}>
           <Text style={[t.textWhite]}>{'Start Game'}</Text>
         </Button>
       </View>

@@ -3,7 +3,7 @@ import { Button, TouchableOpacity, ActivityIndicator, StyleSheet, View } from 'r
 import { colors, t } from 'react-native-tailwindcss';
 
 const ButtonOutline = (props) => {
-  const { loading, selected } = props;
+  const { loading, selected, disabled } = props;
   return (
     <TouchableOpacity
       {...props}
@@ -11,8 +11,8 @@ const ButtonOutline = (props) => {
         t.flex,
         t.textCenter,
         t.border2,
-        selected ? t.bgBlue700 : undefined,
-        props.disabled ? t.borderBlue100 : t.borderBlue700,
+        selected ? (disabled ? t.bgBlue300 : t.bgBlue700) : undefined,
+        disabled ? t.borderBlue100 : t.borderBlue700,
         t.alignCenter,
         t.justifyCenter,
         t.itemsCenter,

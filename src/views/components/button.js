@@ -3,14 +3,14 @@ import { Button, TouchableOpacity, ActivityIndicator, StyleSheet, View } from 'r
 import { colors, t } from 'react-native-tailwindcss';
 
 const ButtonDefault = (props) => {
-  const { loading } = props;
+  const { loading, disabled } = props;
   return (
     <TouchableOpacity
       {...props}
       style={[
         t.flex,
         t.textCenter,
-        props.disabled ? t.bgBlue300 : t.bgBlue700,
+        disabled ? t.bgBlue300 : t.bgBlue700,
         t.alignCenter,
         t.justifyCenter,
         t.itemsCenter,
