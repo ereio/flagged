@@ -2,15 +2,17 @@ import React from 'react';
 import { Button, TouchableOpacity, ActivityIndicator, StyleSheet, View } from 'react-native';
 import { colors, t } from 'react-native-tailwindcss';
 
-const ButtonDefault = (props) => {
-  const { loading } = props;
+const ButtonOutline = (props) => {
+  const { loading, selected } = props;
   return (
     <TouchableOpacity
       {...props}
       style={[
         t.flex,
         t.textCenter,
-        props.disabled ? t.bgBlue300 : t.bgBlue700,
+        t.border2,
+        selected ? t.bgBlue700 : undefined,
+        props.disabled ? t.borderBlue100 : t.borderBlue700,
         t.alignCenter,
         t.justifyCenter,
         t.itemsCenter,
@@ -29,8 +31,7 @@ const ButtonDefault = (props) => {
 const styles = StyleSheet.create({
   buttonDefauts: {
     minHeight: 48,
-    minWidth: 96,
   },
 });
 
-export default ButtonDefault;
+export default ButtonOutline;

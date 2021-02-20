@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, } from 'react-native';
 
 import { Button } from './components';
 
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../global/values';
 import { t } from 'react-native-tailwindcss';
 import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 
 /**
  * Home Screen
@@ -15,9 +16,10 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onStartGame = () => {
-    navigation.replace(Routes.Game);
-  }
+  const onStartGame = useCallback(async () => {
+    navigation.push(Routes.Game);
+  }, [dispatch]);
+
 
   return (
     <SafeAreaView
@@ -48,8 +50,6 @@ const Home = (props) => {
 };
 
 const styles = StyleSheet.create({
-  defaults: {},
-  title: {},
   emoji: {
     fontSize: 128
   }
