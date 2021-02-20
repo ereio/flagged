@@ -1,6 +1,6 @@
 # Flagged
 
-A country guess game based on the country's flag emoji 🗺
+A country guessing game based on the country's flag emoji 🗺
 
 <p align='left'> 
     <img width="200" src="assets/screen-intro.png"/>
