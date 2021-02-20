@@ -18,6 +18,7 @@ import { generateRound, } from '../store/game/actions';
 const Home = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const best = useSelector(state => state.game.best);
   const loading = useSelector(state => state.countries.loading);
   const hasCountries = useSelector(state => !!state.countries.length);
@@ -27,9 +28,9 @@ const Home = (props) => {
       await dispatch(fetchCountries());
     }
     await dispatch(generateRound())
+
     navigation.push(Routes.Game);
   }, [dispatch, hasCountries]);
-
 
   return (
     <SafeAreaView
