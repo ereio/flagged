@@ -62,7 +62,7 @@ const Game = (props) => {
           {`Streak: ${streak}`}
         </Text>
         <Text style={[t.alignCenter, t.text3xl, t.textCenter, t.p4]}>
-          {'What Country\'s flag\nis this?'}
+          {'What country\'s flag\nis this?'}
         </Text>
         <Text style={styles.emoji}>
           {answer.emoji}

@@ -45,7 +45,7 @@ const Home = (props) => {
       <View style={[t.flex, t.flexCol, t.flex1, t.justifyCenter, t.itemsCenter]}>
         <Text style={[t.text5xl]}>{'Flagged'}</Text>
         <Text style={[t.alignCenter, t.text2xl, t.p4]}>
-          {'A Country Guessing Game'}
+          {'A Flag Guessing Game'}
         </Text>
         <Text style={styles.emoji}>
           {'🗺️'}
