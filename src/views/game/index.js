@@ -1,57 +1,61 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 
-import { Button, ButtonOutline } from './components';
+import { Button, ButtonOutline } from '../components';
 
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { t } from 'react-native-tailwindcss';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitAnswer, generateRound, resetGame } from '../store/game/actions';
+import { submitAnswer, generateRound, resetGame } from '../../store/game/actions';
 
 /**
  * Game Screen 
+ * 
+ * Example of using react-native-tailwindcss for
+ * quick prototyping
  */
-const Game = (props) => {
+export const Game = (props) => {
+  // global view state
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [guess, setGuess] = useState(null);
 
+  // global redux state
   const streak = useSelector(state => state.game.streak)
   const answer = useSelector(state => state.game.answer)
   const options = useSelector(state => state.game.options)
   const submitted = useSelector(state => state.game.submitted)
 
-  // if guess is truthy, return if guess was correct
-  const correct = !guess || answer.name == guess;
+  // local state
+  const [guess, setGuess] = useState(null);
+
+  // don't recompute unless answer or guess changes
+  const correct = useMemo(
+    () => !guess || answer.name == guess,
+    [guess, answer]);
+
+  // don't recreate onExit unless navigation updates 
+  const onExit = useCallback(() => {
+    dispatch(resetGame())
+    navigation.dispatch(StackActions.popToTop);
+  }, [navigation])
+
 
   const onStartRound = () => {
     setGuess(null)
     dispatch(generateRound())
   }
 
-  const onSelectCountry = useCallback((country) => {
+  const onSelectCountry = (country) => {
     setGuess(country)
-  }, [options]);
+  };
 
   const onSubmitAnswer = () => dispatch(
     submitAnswer(guess)
   )
 
-  const onExit = useCallback(() => {
-    dispatch(resetGame())
-    navigation.dispatch(StackActions.popToTop);
-  }, [navigation])
-
   return (
     <SafeAreaView
-      style={[
-        t.flex,
-        t.flexCol,
-        t.flexGrow,
-        t.alignCenter,
-        t.justifyAround,
-        t.m6,
-      ]}>
+      style={[t.flex, t.flexCol, t.flexGrow, t.alignCenter, t.justifyAround, t.m6,]}>
       <View style={[t.flex, t.flexRow, t.justifyEnd]}>
         <TouchableOpacity onPress={onExit}>
           <Text style={[t.fontBold, t.text2xl]}>{'Ⅹ'}</Text>
@@ -107,6 +111,4 @@ const styles = StyleSheet.create({
   emoji: {
     fontSize: 128
   }
-});
-
-export default Game;
+}); 

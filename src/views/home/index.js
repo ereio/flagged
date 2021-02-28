@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, } from 'react-native';
-
-import { Button } from './components';
+import { useDispatch, useSelector } from 'react-redux';
+import { t } from 'react-native-tailwindcss';
 
 import { useNavigation } from '@react-navigation/native';
-import { Routes } from '../global/values';
-import { t } from 'react-native-tailwindcss';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
-import { fetchCountries, } from '../store/countries/actions';
-import { generateRound, } from '../store/game/actions';
 
+import { Button } from '../components';
+import { Routes } from '../../global/values';
+import { fetchCountries, } from '../../store/countries/actions';
+import { generateRound, } from '../../store/game/actions';
 
 /**
  * Home Screen
+ * 
+ * Example of using average StyleSheet patterns
+ * for pre-defined declaration of styles 
  */
-const Home = (props) => {
+export const Home = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -34,14 +35,7 @@ const Home = (props) => {
 
   return (
     <SafeAreaView
-      style={[
-        t.flex,
-        t.flexCol,
-        t.flexGrow,
-        t.alignCenter,
-        t.justifyAround,
-        t.m6,
-      ]}>
+      style={styles.homeContainer}>
       <View style={[t.flex, t.flexCol, t.flex1, t.justifyCenter, t.itemsCenter]}>
         <Text style={[t.text5xl]}>{'Flagged'}</Text>
         <Text style={[t.alignCenter, t.text2xl, t.p4]}>
@@ -66,9 +60,16 @@ const Home = (props) => {
 };
 
 const styles = StyleSheet.create({
+  homeContainer: {
+    flex: 1,
+    flexGrow: 1,
+    flexDirection: 'column',
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginHorizontal: 24,
+    marginVertical: 24,
+  },
   emoji: {
     fontSize: 128
   }
 });
-
-export default Home;

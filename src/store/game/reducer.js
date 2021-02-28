@@ -7,7 +7,7 @@ import {
 } from './actions';
 import initialState from './state';
 
-export default function gameReducer(state = initialState(), action) {
+export default gameReducer = (state = initialState(), action) => {
   switch (action.type) {
     case SET_SUBMITTED: {
       return {

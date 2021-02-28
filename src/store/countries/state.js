@@ -1,4 +1,4 @@
-export default function initialState() {
+export default initialState = () => {
   return {
     loading: false,
     countries: [],

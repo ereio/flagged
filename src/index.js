@@ -17,7 +17,7 @@ import { apolloClient } from './services/countries/client';
 import { AppNavigator } from './views/navigator';
 
 
-const App = () => {
+export const App = () => {
   return (
     <ApolloProvider client={apolloClient}>
       <Provider store={store}>
@@ -34,6 +34,4 @@ const styles = StyleSheet.create({
   fullscreen: {
     flex: 1,
   },
-});
-
-export default App;
+}); 

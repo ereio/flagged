@@ -1,4 +1,4 @@
-export default function initialState() {
+export default initialState = () => {
   return {
     best: 0,
     streak: 0,

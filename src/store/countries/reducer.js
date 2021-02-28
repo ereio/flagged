@@ -6,7 +6,7 @@ import {
 } from './actions';
 import initialState from './state';
 
-export default function countriesReducer(state = initialState(), action) {
+export default countriesReducer = (state = initialState(), action) => {
   switch (action.type) {
     case FETCH_COUNTRIES_START:
       return {

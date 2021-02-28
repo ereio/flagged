@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import React from 'react';
-import Home from './home';
-import Game from './game';
+import { Home } from './home';
+import { Game } from './game';
 import { Routes } from '../global/values';
 
 const Stack = createStackNavigator();
