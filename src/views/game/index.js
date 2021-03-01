@@ -78,7 +78,7 @@ export const Game = (props) => {
                 {'Correct!'}
               </Text> :
               <Text style={[t.text3xl, t.textGreen600, t.textCenter, t.textRed600]}>
-                {'Wrong Country :('}
+                {'Wrong country :('}
               </Text>
           )}
         </View>
@@ -93,7 +93,7 @@ export const Game = (props) => {
             </View>
           ))}
         </View>
-        <View style={[t.flex, t.flexCol, t.justifyCenter,]}>
+        <View style={[t.flex, t.flexCol, t.justifyCenter]}>
           {!submitted ?
             <Button disabled={!guess} onPress={onSubmitAnswer}>
               <Text style={[t.textWhite]}>{'Submit Answer'}</Text>

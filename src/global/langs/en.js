@@ -1,6 +1,8 @@
-const Routes = {
-  Home: 'Home',
-  Game: 'Game',
-};
 
-export { Routes, OPTION_AMOUNT };
+/**
+ * Allows for later using a i18n library easily
+ */
+module.exports = {
+  appTitle: "Flagged",
+  subtitle: "A Flag Guessing Game"
+};

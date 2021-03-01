@@ -10,6 +10,8 @@ import { Routes } from '../../global/values';
 import { fetchCountries, } from '../../store/countries/actions';
 import { generateRound, } from '../../store/game/actions';
 
+import { subtitle, appTitle } from '../../global/langs/en';
+
 /**
  * Home Screen
  * 
@@ -34,25 +36,24 @@ export const Home = (props) => {
   }, [dispatch, hasCountries]);
 
   return (
-    <SafeAreaView
-      style={styles.homeContainer}>
-      <View style={[t.flex, t.flexCol, t.flex1, t.justifyCenter, t.itemsCenter]}>
-        <Text style={[t.text5xl]}>{'Flagged'}</Text>
-        <Text style={[t.alignCenter, t.text2xl, t.p4]}>
-          {'A Flag Guessing Game'}
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>{appTitle}</Text>
+        <Text style={styles.subtitleText}>
+          {subtitle}
         </Text>
         <Text style={styles.emoji}>
           {'🗺️'}
         </Text>
         {
-          !best || <Text style={[t.textXl]}>
+          !best || <Text style={styles.streakText}>
             {`Best Streak: ${best}`}
           </Text>
         }
       </View>
-      <View style={[t.flex, t.flexCol, t.justifyCenter, t.flex1]}>
+      <View style={styles.optionsContainer}>
         <Button disabled={loading} loading={loading} onPress={() => onStartGame()}>
-          <Text style={[t.textWhite]}>{'Start Game'}</Text>
+          <Text style={styles.optionText}>{'Start Game'}</Text>
         </Button>
       </View>
     </SafeAreaView>
@@ -60,14 +61,41 @@ export const Home = (props) => {
 };
 
 const styles = StyleSheet.create({
-  homeContainer: {
-    flex: 1,
+  mainContainer: {
+    display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',
     alignItems: "center",
     justifyContent: "space-around",
     marginHorizontal: 24,
     marginVertical: 24,
+  },
+  titleContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+  titleText: {
+    fontSize: 48,
+  },
+  subtitleText: {
+    fontSize: 24,
+    textAlign: 'center',
+    alignItems: 'center',
+    padding: 4
+  },
+  streakText: {
+    fontSize: 20,
+  },
+  optionText: {
+    color: '#ffffff'
+  },
+  optionsContainer: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   emoji: {
     fontSize: 128
